@@ -1,10 +1,17 @@
 import { Button } from "@/components/ui/button"
 import { ModeToggle } from "./ThemeToggle"
 import Link from "next/link"
-import { HomeIcon } from "lucide-react"
+import { BellIcon, HomeIcon, UserIcon } from "lucide-react"
+import { currentUser } from "@clerk/nextjs/server"
+import { SignInButton, UserButton } from "@clerk/nextjs"
+
 
 
 const DesktopNavbar = () => {
+  // const user = currentUser();
+  const user = null;
+  console.log(user);
+  
   return (
     <div className="hidden md:flex items-center space-x-4">
     <ModeToggle />
@@ -16,7 +23,30 @@ const DesktopNavbar = () => {
      </Link>
     </Button> 
 
- 
+  { user ? (
+    <>
+    <Button variant='ghost' className="flex items-center gap-2" asChild>
+      <Link href='/notifications'>
+       <BellIcon className="w-5 h-5" />
+       <span className="hidden lg:inline">Notifications</span>
+      </Link>
+     </Button>
+
+     <Button variant="ghost" className="flex items-center gap-2" asChild>
+      {/* <Link href={`/profile/${user.username ?? user.emailAddressess[0].emailAddress.split("@")[0]}`}> */}
+      <UserIcon className="w-5 h-5" />
+      <span className="hidden lg:inline">Profile</span>
+      {/* </Link> */}
+     </Button>
+     <UserButton />
+    </>
+  ) : (
+    <SignInButton mode="modal">
+          <Button variant="default">Sign In</Button>
+        </SignInButton>
+  )
+
+  }
 
     </div>
   )

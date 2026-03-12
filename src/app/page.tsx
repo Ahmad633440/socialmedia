@@ -1,12 +1,16 @@
-import { ModeToggle } from "./components/ThemeToggle"
+import prisma from "@/lib/prisma"
 
 
 
-const page = () => {
+const page = async () => {
+
+
   return (
-    <div className="flex justify-between items-center p-4">
-      <h1>Social Media App</h1>
-      <ModeToggle />
+    <div className=" p-4">
+     
+      <h2>
+        Home Page Content
+      </h2>
     </div>
   )
 }
